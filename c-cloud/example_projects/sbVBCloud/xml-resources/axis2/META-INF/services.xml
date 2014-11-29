@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+    <service name="ClassCloud" scope="application">
+        <description>ClassCloud service</description>
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only" class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">sbVB.ClassCloud</parameter>
+    </service>
+    <service name="MessageCloud" scope="application">
+        <description>MessageCloud service</description>
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only" class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">sbVB.MessageCloud</parameter>
+    </service>
+</serviceGroup>

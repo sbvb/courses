@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<axis2 xmlns="http://www.netbeans.org/ns/axis2/1">
+    <service name="ClassCloud">
+        <service-class>sbVB.ClassCloud</service-class>
+    </service>
+    <service name="MessageCloud">
+        <service-class>sbVB.MessageCloud</service-class>
+    </service>
+</axis2>

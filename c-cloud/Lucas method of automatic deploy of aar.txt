@@ -1,0 +1,29 @@
+Edit file nbproject/axis2-build.xml 
+
+edit as below
+
+ <target name="axis2-aar" depends="compile">
+        <mkdir dir="${build.dir}/axis2/WEB-INF/services"/>
+        <jar destfile="${build.dir}/axis2/WEB-INF/services/${ant.project.name}.aar">
+            <fileset excludes="**/Test.class" dir="${build.dir}/classes"/>
+            <fileset dir="${basedir}/xml-resources/axis2">
+                <include name="**/*.wsdl"/>
+                <include name="**/*.xsd"/>
+                <include name="**/*.xml"/>
+                <include name="**/*.jar"/>
+            </fileset>
+        </jar>
+
+	<!-- ############################################################ -->
+	<!-- Lucas method of automatic deploy of aar begin -->
+	<!-- ############################################################ -->
+        <copy toDir="/home/sbvb/Dropbox/app/apache-tomcat-7.0.52/webapps/axis2/WEB-INF/services">
+            <fileset dir="${build.dir}/axis2/WEB-INF/services">
+                <include name="*.aar"/>
+            </fileset>
+        </copy>
+	<!-- ############################################################ -->
+	<!-- Lucas method of automatic deploy of aar end -->
+	<!-- ############################################################ -->
+
+    </target>

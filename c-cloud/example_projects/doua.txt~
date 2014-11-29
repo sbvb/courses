@@ -1,0 +1,88 @@
+DOUA stands for Data Oriented Usecase Authorization
+
+http://www.sbvb.com.br/proposals/DOUA-sbvb.com.br.pdf
+
+Things to improuve in current version of DOUA class
+
+////////////////////////////////////////////////////////////////////////////////////////
+// client salt
+////////////////////////////////////////////////////////////////////////////////////////
+
+*) one single function to calculate all hash
+
+1) add salt to client password (login with password hash(hash(password_client)+salt_client) and salt_client=hash(rand)
+
+loginOK = hash(hash(password_client) + salt_client) == hash(hash(password_server) + salt_client) 
+// "hash(password_server)" is saved in server
+// login sends "hash(hash(password_client) + salt_client)" and "salt_client"
+
+client get password_client in memory
+calculates hash(password_server)
+create salt_client=hash(rand)
+send to server "hash(hash(password_client) + salt_client)" and "salt_client"
+
+every time a login is attempted, new hashes are created
+but still the pair of hashes if used again will login successfuly
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// server salt
+////////////////////////////////////////////////////////////////////////////////////////
+
+2) add salt to server password (save hash(password_server+salt_server) and salt_server=hash(rand))
+
+// login user procedure
+get salt_server(userlogin) (this is public information)
+get in memory password_client
+client creates salt_client
+client calculates "hash( hash( hash(password_client) + salt_server) + salt_client)"
+client sends "hash( hash( hash(password_client) + salt_server) + salt_client)" and "salt_client"
+
+
+loginOK = hash( hash( hash(password_client) + salt_server) + salt_client) == 
+  hash( hash( hash(password_server) + salt_server) + salt_client) 
+
+// client ask for salt_server of a given user (accessed without authorization)
+// "hash(password_server + salt_server)" and "salt_server" are saved in server
+// login sends "hash( hash( hash(password_client) + salt_server) + salt_client)" and "salt_client"
+
+// create user procedure
+get client_password
+calculate hash(client_password), and call it hash(server_password)
+create salt_server=hash(rand)
+save as user attributes: "hash(hash(client_password)+salt_server)" and "salt_server"
+
+
+2 users with same server_password have NOT saved the same pair below
+"hash(hash(client_password)+salt_server)" and "salt_server"
+
+////////////////////////////////////////////////////////////////////////////////////////
+// User salt_client black list
+////////////////////////////////////////////////////////////////////////////////////////
+
+Each user should save a list of used salt_client, that must not be used twice.
+If used twice, it is probably due to sniffer.
+
+////////////////////////////////////////////////////////////////////////////////////////
+// Add User IP so session
+////////////////////////////////////////////////////////////////////////////////////////
+
+to authorize a resouce, add the checkOK of user IP (sniffer IP is tipically different
+from user IP)
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// Resource nicknake
+////////////////////////////////////////////////////////////////////////////////////////
+
+3) add Resource nickname, so that the resource_id is not used to validate the resouce
+-) The naive implementation is to add a method in the DOUA class to compare strings 
+in sequence through all Resource nicknames, until get a match.
+-) A better implementation would be to avoid this sequence of comparisons
+everytime a Resource is accessed, and make a cache of the Resource ID, saving it in the global scope of Tomcat.
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+Add the code below to nbproject/axis2-build.xml
+
+
+	<!-- ############################################################ -->
+	<!-- Lucas method of automatic deploy of aar begin -->
+	<!-- ############################################################ -->
+        <copy toDir="/home/sbvb/Dropbox/app/apache-tomcat-7.0.52/webapps/axis2/WEB-INF/services">
+            <fileset dir="${build.dir}/axis2/WEB-INF/services">
+                <include name="*.aar"/>
+            </fileset>
+        </copy>
+	<!-- ############################################################ -->
+	<!-- Lucas method of automatic deploy of aar end -->
+	<!-- ############################################################ -->
