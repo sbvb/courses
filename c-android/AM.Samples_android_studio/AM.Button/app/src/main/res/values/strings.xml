@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AM.Button</string>
+    <string name="init_string">Some String to initialize</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_translated_string">My Translated String</string>
+
+</resources>

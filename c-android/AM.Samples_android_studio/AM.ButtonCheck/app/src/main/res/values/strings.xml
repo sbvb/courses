@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AM.ButtonCheck</string>
+    <string name="action_settings">Settings</string>
+    <string name="you_clicked">you clicked</string>
+    <string name="times">times</string>
+    <string name="inic_text">something</string>
+    <string name="button">button</string>
+    <string name="color_large">Use colored text</string>
+    <string name="color_small">Check to make text to be colored</string>
+    <string name="bold_large">Use bold typeface</string>
+    <string name="bold_small">Check to make text to be bold</string>
+
+</resources>
